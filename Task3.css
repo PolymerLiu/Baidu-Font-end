@@ -1,0 +1,40 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+.col1{
+	width: 200px;
+	padding: 20px;
+	margin: 20px 0 0 20px;
+	position: absolute;left: 0;top: 0;/*三列布局方法，左右俩列绝对
+									定位，中间通过设置margin值来得
+									到宽度自适应的效果*/
+	border:1px solid #999;
+}
+.col2{
+	padding: 20px;
+	margin: 20px 200px 0 280px; /*1？无法解决高度自适应问题
+								2？无法解决背景颜色的继承问题*/
+	border:1px solid #999;
+}
+.col3{
+	width: 120px;
+	padding: 20px;
+	margin: 20px 20px 0 0;
+	position: absolute;right: 0;top: 0;
+	border:1px solid #999;
+}
+#wrap{
+	background-color: #eee;
+	border:1px solid #999;
+	height: 500px;
+
+}
+.col1 p{
+	float: right;
+}
+img{
+	border:1px solid #999;
+	margin: 5px 0 5px 0;
+
+}
