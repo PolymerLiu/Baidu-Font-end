@@ -5,29 +5,30 @@
 .col1{
 	width: 200px;
 	padding: 20px;
-	margin: 20px 0 0 20px;
+	margin: 40px 0 0 40px;
 	position: absolute;left: 0;top: 0;/*三列布局方法，左右俩列绝对
 									定位，中间通过设置margin值来得
 									到宽度自适应的效果*/
 	border:1px solid #999;
+	background-color: white;
 }
 .col2{
 	padding: 20px;
-	margin: 20px 200px 0 280px; /*1？无法解决高度自适应问题
-								2？无法解决背景颜色的继承问题*/
+	margin: 20px 160px 20px 280px; /*1？无法解决高度自适应问题*/
+	background-color: white;
 	border:1px solid #999;
+
 }
 .col3{
 	width: 120px;
-	padding: 20px;
-	margin: 20px 20px 0 0;
+	margin: 40px;
 	position: absolute;right: 0;top: 0;
 	border:1px solid #999;
+	background-color: white;
 }
 #wrap{
 	background-color: #eee;
 	border:1px solid #999;
-	height: 500px;
 
 }
 .col1 p{
@@ -35,6 +36,10 @@
 }
 img{
 	border:1px solid #999;
-	margin: 5px 0 5px 0;
+	margin: 10px 0 10px 20px;
 
+}
+body{
+	border:1px solid #999;
+	margin: 20px;
 }
