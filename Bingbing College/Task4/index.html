@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <title>IFE JavaScript Task 04</title>
+    <style type="text/css">
+    	span{
+    		display: inline-block;
+            margin: 10px 5px;
+            padding: 0px 10px;
+            height: 30px;
+            line-height: 30px;
+            background-color: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+	<div>
+		<input type="text" id="num">
+		<input type="button" value="左侧入" id="left-in">
+		<input type="button" value="右侧入" id="right-in">
+		<input type="button" value="左侧出" id="left-out">
+		<input type="button" value="右侧出" id="right-out">
+	</div>
+	<div id="list">
+
+	</div>
+
+	<script type="text/javascript">
+
+		// leftIn方法
+		// 点击"左侧入"，将input中输入的数字从左侧插入队列中
+
+		function leftIn(list){
+			var num = document.getElementById('num').value;
+			if (checkInput(num)) {
+				var span = document.createElement('span')
+				span.innerHTML = num;
+				//动态生成的元素在元素生成的时候绑定事件或者利用事件委托，事件委托性能更好
+                // span.onclick = function() {alert(this.innerHTML)};
+                var spanList = list.childNodes;
+                list.insertBefore(span,spanList[0]);
+			}
+		}
+		// rightIn方法
+  		//点击"右侧入"，将input中输入的数字从右侧插入队列中
+
+  		function rightIn(list){
+  			var num = document.getElementById("num").value;
+            if (checkInput(num)) {
+                var span = document.createElement("span")
+                span.innerHTML = num;
+                //动态生成的元素在元素生成的时候绑定事件或者利用事件委托，事件委托性能更好
+                // span.onclick = function() {alert(this.innerHTML)};
+                list.appendChild(span);
+            }
+  		}
+  		//leftOut方法
+  		//点击"左侧出"，读取并删除队列左侧第一个元素，并弹窗显示元素的数值
+
+  		function leftOut(list){
+  			var childs = list.childNodes;
+  			alert(childs[0].innerHTML);//先显示元素中的数值，因为NodeList具有时效性
+  			list.removeChild(childs[0]);
+  		}
+  		//rightOut方法
+  		//点击"右侧出"，读取并删除队列右侧第一个元素，并弹窗显示元素的数值
+
+  		function rightOut(list){
+  			var childs = list.childNodes;
+  			alert(childs[childs.length - 1].innerHTML);//先显示元素中的数值，因为NodeList具有时效性
+  			list.removeChild(childs[childs.length - 1]);
+  		}
+  		//输入验证
+  		//输入不能为空，且只能是整数
+
+  		function checkInput(num){
+  			reg = /^[-+]?\d*$/;//整数的正则表达式
+  			if (num == "") {
+  				alert("输入不能为空！");
+  				return false;
+  			}else if (!reg.test(num)) {
+  				alert("只能输入整数！");
+  				return false;
+  			}else
+  				return true;
+  		}
+  		function init(){
+  			var list = document.getElementById('list');
+  			document.getElementById('left-in').onclick = function(){
+  				leftIn(list);
+  			};
+  			document.getElementById('right-in').onclick = function(){
+  				rightIn(list);
+  			};
+  			document.getElementById('left-out').onclick = function(){
+  				leftOut(list);
+  			};
+  			document.getElementById('right-out').onclick = function(){
+  				rightOut(list);
+  			};
+  			//deleteClick方法
+  			//点击队列中任何一个元素，该元素会从队列中删除
+  			//动态生成的节点绑定事件需要利用事件委托原理
+
+  			document.getElementById('list').onclick = function(e){
+  				e = e || window.event;
+  				var t = e.target || e.srcElement;// t：目标对象
+  				var tagName = t.tagName; //tagName 标签名称
+  				if (tagName == 'SPAN') {
+  					list.removeChild(t);
+  				}
+  			}
+  		}
+  		init();
+	</script>
+</body>
+</html>
