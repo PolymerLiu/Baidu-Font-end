@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <title>IFE JavaScript Task 05</title>
+    <style type="text/css">
+    	span{
+    		display: inline-block;
+            margin: 10px 5px;
+            padding: 0px 10px;
+            height: 30px;
+            line-height: 30px;
+            background-color: red;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+	<div>
+		<input type="text" id="num">
+    <button id="left-in">左侧入</button>
+    <button id="right-in">右侧入</button>
+    <button id="left-out">左侧出</button>
+    <button id="right-out">右侧出</button>
+		<button id="sort">排序</button>
+	<div id="list">
+
+	</div>
+
+	<script type="text/javascript">
+
+		// leftIn方法
+		// 点击"左侧入"，将input中输入的数字从左侧插入队列中
+
+
+		function leftIn(list){
+			var num = document.getElementById('num').value;
+			if (checkInput(num)) {
+        var span = document.createElement('span');
+        var list = document.getElementById('list');
+        //将数字大小与条形图高度联系起来
+        
+        span.style.height = num+'px';
+        if (list.childNodes.length > 60) {
+          alert('当前元素超过60');
+        }else {
+          list.insertBefore(span,list.childNodes[0]);
+        }
+				
+			}
+		}
+
+		// rightIn方法
+  		//点击"右侧入"，将input中输入的数字从右侧插入队列中
+
+
+  		function rightIn(list){
+  			var num = document.getElementById("num").value;
+            if (checkInput(num)) {
+              var list = document.getElementById('list');
+                var span = document.createElement('span');
+                span.style.height = num+'px';
+                if (list.childNodes.length > 60) {
+                  alert("当前元素超过60");
+                }else{
+                  list.appendChild(span);
+                }
+                
+            }
+  		}
+
+  		//leftOut方法
+  		//点击"左侧出"，读取并删除队列左侧第一个元素，并弹窗显示元素的数值
+
+
+  		function leftOut(list){
+        var list = document.getElementById('list');
+        var spanList = list.childNodes;
+        if (spanList.length === 0) {
+          alert('队列中已经没有元素');
+        }else{
+          alert(parseInt(spanList[0].style.height));
+          list.removeChild(spanList[0]);
+        }
+  		}
+
+  		//rightOut方法
+  		//点击"右侧出"，读取并删除队列右侧第一个元素，并弹窗显示元素的数值
+
+
+  		function rightOut(list){
+        var list = document.getElementById('list');
+        var spanList = list.childNodes;
+        if (spanList.length === 0) {
+          alert("队列中已经没有元素");
+        }else{
+          alert(parseInt(spanList[spanList.length-1].style.height));
+          list.removeChild(spanList[spanList.length-1]);
+        }
+  		}
+
+      //排序方法
+
+
+      function sort(list) {
+        var list = document.getElementById('list');
+        var spanList = list.children;
+        for (var i = 0, len = spanList.length; i < len; i++) {
+            for (var j = i+1; j < len; j++) {
+                if (parseInt(spanList[i].style.height) > parseInt(spanList[j].style.height)) {
+                    // var node = list.removeChild(spanList[i]);
+                    // list.insertBefore(node, spanList[j]);
+                    var temp = spanList[i].style.height;
+                    spanList[i].style.height = spanList[j].style.height;
+                    spanList[j].style.height = temp;
+                }
+            }
+        }
+      }
+
+  		//输入验证
+  		//输入不能为空，且只能是整数
+
+
+  		function checkInput(num){
+  			reg = /^[-+]?\d*$/;//整数的正则表达式
+  			if (num == "") {
+  				alert("输入不能为空！");
+  				return false;
+  			}else if (!reg.test(num)) {
+  				alert("只能输入整数！");
+  				return false;
+  			}else if (!(num >= 10 && num <= 100)) {
+          alert('请输入10-100之间的整数');
+          return false;
+        }
+  				return true;
+  		}
+
+      
+  		function init(){
+  			var list = document.getElementById('list');
+  			document.getElementById('left-in').onclick = function(){
+  				leftIn(list);
+  			};
+  			document.getElementById('right-in').onclick = function(){
+  				rightIn(list);
+  			};
+  			document.getElementById('left-out').onclick = function(){
+  				leftOut(list);
+  			};
+  			document.getElementById('right-out').onclick = function(){
+  				rightOut(list);
+  			};
+        document.getElementById('sort').onclick = function(){
+          sort(list);
+        };
+
+  			//deleteClick方法
+  			//点击队列中任何一个元素，该元素会从队列中删除
+  			//动态生成的节点绑定事件需要利用事件委托原理
+
+
+  			document.getElementById('list').onclick = function(e){
+  				e = e || window.event;
+  				var t = e.target || e.srcElement;// t：目标对象
+  				var tagName = t.tagName; //tagName 标签名称
+  				if (tagName == 'SPAN') {
+  					list.removeChild(t);
+  				}
+  			}
+  		}
+  		init();
+	</script>
+</body>
+</html>
