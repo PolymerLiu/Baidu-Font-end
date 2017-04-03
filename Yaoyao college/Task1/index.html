@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>3-1</title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		body>div{
+			margin: 75px;
+			font-size: 21px;
+			font-family: '微软雅黑';
+		}
+		.inbox,.btn{
+			width: 500px;
+			height: 60px;
+			border-radius: 10px;
+			font-size: 25px;
+			box-sizing: border-box;
+		}
+		.inbox{
+			margin-left: 50px;
+			border: 2px solid #ccc;
+		}
+		.btn{
+			width: 100px;
+			border: none;
+			background:  #3355d0;
+			color: #fff;
+			margin-left: 20px;
+		}
+		#prompt{
+			color: #ccc;
+			margin-left: 100px;
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div>
+		<span>名称</span>
+		<input type="text" id="input" class="inbox" value="">
+		<input type="button" class="btn" value="验证" id="button">
+		<div id="prompt">必填，长度为4~16个字符</div>
+	</div>
+</body>
+<script type="text/javascript">
+	function strlen(str){
+    var len = 0;
+	    for (var i=0; i<str.length; i++) { 
+		    var c = str.charCodeAt(i); //charCodeAt()用来返回指定位置的字符的Unicode编码，返回值是0-65535之间整数
+		    if (c<255) { 
+		       len++; 
+		    } else { 
+		    	len+=2; 
+	     	} 
+	    } 
+	    console.log(len)
+	    return len;
+	}
+	function verify(){
+		var input=document.getElementById('input');
+		var prompt=document.getElementById('prompt');
+		var len=strlen(input.value);
+		if(len>=4&&len<=16){
+			prompt.innerHTML="名称格式正确";
+			prompt.style.color="#60ba49";
+			input.style.borderColor='#60ba49';
+		}else if(input.value==''){
+			prompt.innerHTML="姓名不能为空";
+			prompt.style.color="red";
+			input.style.borderColor="red";
+		}else{
+			prompt.innerHTML="长度为4~16个字符";
+			prompt.style.color="red";
+			input.style.borderColor="red";
+		}
+	}
+	document.getElementById("button").addEventListener('click',verify);
+</script>
+</html>
