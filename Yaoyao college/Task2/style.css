@@ -1,0 +1,32 @@
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	#wrap{
+		position: relative;
+	}
+	label{
+		display: inline-block;
+		text-align: right;
+		width: 100px;
+	}
+
+	input{
+		width: 500px;
+		height: 40px;
+		margin-left: 40px;
+	}
+
+	section{
+		margin-top: 20px;
+		text-align: center;
+	}
+
+	button{
+		margin-left: 560px;
+		background: #3355d0;
+		font-size: 25px;
+		color: white;
+		padding: 5px 20px;
+		border-radius: 10px;
+	}
